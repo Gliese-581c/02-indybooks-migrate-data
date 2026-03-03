@@ -52,8 +52,7 @@ namespace IndyBooks.Controllers
         public IActionResult CreateBook(CreateBookVM bookVM)
         {
             //TODO: Add Model Validation
-            if (!ModelState.IsValid)
-            { return View("CreateBook", bookVM); }
+            if (!ModelState.IsValid) { return View(); }
 
             //TODO: Once you've added the Writers DbSet, create a Writer object using the view Model info
             Writer author = new Writer { Name = bookVM.Author };
@@ -64,6 +63,7 @@ namespace IndyBooks.Controllers
 
             //TODO: Once you've added the Writers DbSet, add author to the dataset
             _db.Writers.Add(author);
+            _db.Books.Add(book);
             _db.SaveChanges();
       
             return RedirectToAction("Search");

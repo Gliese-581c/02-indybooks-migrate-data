@@ -12,10 +12,12 @@ public class CreateBookVM
     [Required (ErrorMessage = "Title is required")]
     public string Title { get; set; }
 
-    public string? Author { get; set; }
+    [Required (ErrorMessage = "Author is required")]
+    public string Author { get; set; }
 
     public string? SKU { get; set; }
 
+    [Required (ErrorMessage = "Price is required")]
     public decimal Price { get; set; }
 
     public string? Year { get; set; }
