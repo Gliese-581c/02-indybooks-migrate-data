@@ -10,9 +10,9 @@
     <!-- TODO: Modify the basic template below using asp- tag helpers to create 
         a label, field, and validaiton error message span for each CreateBook field in Fig.3 -->
     <div>
-        <label ></label>
-        <input />
-        <span ></span>
+        <label asp-for="Title" ></label>
+        <input asp-for="Title"/>
+        <span asp-validation-for="Title" ></span>
     </div>
    
     <input type="submit" value="Submit" />

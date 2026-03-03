@@ -6,6 +6,7 @@ using IndyBooks.Models;
 using IndyBooks.Services;
 using IndyBooks.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace IndyBooks.Controllers
 {
@@ -41,25 +42,30 @@ namespace IndyBooks.Controllers
         }
 
         //TODO: Add the CreateBook GET method
+        [HttpGet]
+        public IActionResult CreateBook()
+        {
+            return View();
+        }
  
         [HttpPost]
         public IActionResult CreateBook(CreateBookVM bookVM)
         {
             //TODO: Add Model Validation
-
+            if (!ModelState.IsValid)
+            { return View("CreateBook", bookVM); }
 
             //TODO: Once you've added the Writers DbSet, create a Writer object using the view Model info
-        
-
+            Writer author = new Writer { Name = bookVM.Author };
 
             //TODO: Once you've added the Writers DbSet, modify the Book using your newly created author.
-   
+            Book book = new Book { Title = bookVM.Title, Author = author, Price = bookVM.Price, Year = bookVM.Year, SKU = bookVM.SKU };
 
 
             //TODO: Once you've added the Writers DbSet, add author to the dataset
+            _db.Writers.Add(author);
+            _db.SaveChanges();
       
-
-
             return RedirectToAction("Search");
         }
     }
