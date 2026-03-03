@@ -18,23 +18,23 @@ namespace IndyBooks.Services
             Randomizer.Seed = new Random(Guid.NewGuid().GetHashCode()); //guarantees that each run is different
 
             //TODO: after adding a Writer Model class and Entity to the DbContext, uncomment the code below to generate fake writers, using the "authors" array as the source of names.
-            /*
+            
             var authorIndex = 0;
             var fakeWriter = new Faker<Writer>()
-                .RuleFor(w => w.Name, f => authors[authorIndex++]);
+                .RuleFor(w => w.Name, f => author_names[authorIndex++]);
             //Create a new set of 
             var writers = fakeWriter.Generate(45);
             dbContext.Writers.AddRange(writers);
-            */
+            
 
             //TODO: after updating the Book Entity, update the RuleFor the Author to add a random Writer from the writers collection
                 var fakeBook = new Faker<Book>()
                 .RuleFor(b => b.Title, t => t.PickRandom(titles))
-                .RuleFor(b => b.Author, t => t.PickRandom(author_names))
+                .RuleFor(b => b.Author, t => t.PickRandom(writers))
                 .RuleFor(b => b.SKU, n => n.Random.Replace("IB****-##"))
                 .RuleFor(b => b.Price, f => f.Random.Decimal(9.99M, 149.99M))
                 //TODO BONUS: Add a rule to populate the Year with a date between 1902 and 2026
-                ;
+                .RuleFor(b => b.Year, f => f.Date.Between(new DateTime(1902, 1, 1), new DateTime(2026, 1, 1)).ToString("yyyy"));
             var books = fakeBook.Generate(100); // Creates a collection of 100 books
 
             //Adds ALL the items in books to the database

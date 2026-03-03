@@ -12,6 +12,7 @@ namespace IndyBooks.Services
         //Access to Collections representing DB tables
         public DbSet<Book> Books { get; set; }
         //TODO: Add the Writers DbSet
+        public DbSet<Writer> Writers { get; set; }
 
         // Used to fine tune certain aspects of the Data model
         protected override void OnModelCreating(ModelBuilder modelBuilder)

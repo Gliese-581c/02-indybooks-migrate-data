@@ -43,7 +43,7 @@ public class Repository
             if (searchVM.Author != null && searchVM.Author.Trim().Length > 0)
             {
                 foundBooks = foundBooks
-                            .Where(b => b.Author.EndsWith(searchVM.Author));
+                            .Where(b => b.Author.Name.Contains(searchVM.Author));
             }
             // Uses similar logic to filter foundbooks collection by price, if given
             if(searchVM.MinPrice > 0)

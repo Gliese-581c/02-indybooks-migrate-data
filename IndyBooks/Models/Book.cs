@@ -17,6 +17,6 @@ namespace IndyBooks.Models
 
         public string Year { get; set; }
 
-        public string Author {get; set; }
+        public Writer Author {get; set; }
     }
 }
